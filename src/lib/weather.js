@@ -17,6 +17,7 @@ async function sleep(ms) {
  * @returns {Array<Forecast>}
  */
 function parseResponse(data) {
+
   return data;
 }
 

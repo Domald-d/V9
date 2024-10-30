@@ -65,6 +65,7 @@ function renderIntoResultsContent(element) {
 function renderResults(location, results) {
   const resContainer = el("div", { class: "results" });
   const titel = el("h2", {}, `Veður fyrir ${location.title}`);
+  //const spa = el('p',{},`spá dagsins fyrir ${location.title}`);
   const tabelEle = el("table", { class: "forecast" });
   const headEle = el(
     "thead",
@@ -103,7 +104,7 @@ function renderResults(location, results) {
  * @param {Error} error
  */
 function renderError(error) {
-  const msg = el("p", {}, `Error ${error.message}`);
+  const msg = el("p", {}, `Villa: ${error.message}`);
   renderIntoResultsContent(msg);
   // TODO útfæra
 }
@@ -186,13 +187,6 @@ async function onSearchMyLocation() {
       renderError(error);
     }
   });
-  renderLoading();
-  try {
-    const results = await weatherSearch(location.lat, location.lng);
-    renderResults(location, results);
-  } catch (error) {
-    renderError(error);
-  }
 }
 
 /**
@@ -265,7 +259,7 @@ function render(container, locations, onSearch, onSearchMyLocation) {
   locationsElement.appendChild(locationsListElement);
   const myLocation = el(
     "button",
-    { class: "locations_button", click: onSearchMyLocation },
+    { class: "locations__button", click: onSearchMyLocation },
     "Mín staðsetning",
   );
   locationsListElement.appendChild(myLocation);
